@@ -31,7 +31,7 @@ public class databaseConnection {
 	// set details of this block according to your postgres settings
 	//'RecruitMe' is the DB name	
 
-	 private static final String url = "jdbc:postgresql://localhost/PROlogue";
+	 private static final String url = "jdbc:postgresql://localhost/test_2";
 	 private static final String user = "postgres";
 	 private static final String password = "postgres";  
 	//**********************************************************************************
@@ -89,7 +89,23 @@ public class databaseConnection {
 	   }
 	   
 	   
-	   
+	   public static int totalPostings() {
+		   int total;
+		   connect();
+		   PreparedStatement pst=null;
+		   try {
+			   pst=conn.prepareStatement("SELECT COUNT(positionid) from recruiterrequirements;");
+			   ResultSet r=(ResultSet)pst.executeQuery();
+			   r.next();
+			   total = r.getInt("count");
+			   return total;
+		   } catch (SQLException e) {
+			   System.out.println("databaseConnection at line "+lineNum()+":"+e.getMessage());
+			   total=0;
+		   }
+		   disconnect();
+		   return total;
+	   }
 	   
 	   
 	   //Selects and displays all the data in the given table 
@@ -279,8 +295,8 @@ public class databaseConnection {
 			//github
 			int git_repo=ScraperOfAllData.repo_Git(selectCertainData("candidatedetails",regNo,"github"));
 			int git_star=ScraperOfAllData.stars_Git(selectCertainData("candidatedetails",regNo,"github"));
-			int git_followers=ScraperOfAllData.followers_Git(selectCertainData("candidatedetails",regNo,"github"));
-			int git_following=ScraperOfAllData.following_Git(selectCertainData("candidatedetails",regNo,"github"));
+			String git_followers=ScraperOfAllData.followers_Git(selectCertainData("candidatedetails",regNo,"github"));
+			String git_following=ScraperOfAllData.following_Git(selectCertainData("candidatedetails",regNo,"github"));
 			System.out.println("databaseConnection at line "+lineNum()+": scrapped details from Github");
 
 			//codeforces
@@ -329,8 +345,8 @@ public class databaseConnection {
 			   pst3.setInt(1,regNo);//puts the regno in the 1st posn
 			   pst3.setInt(2,git_repo);
 			   pst3.setInt(3,git_star);
-			   pst3.setInt(4, git_followers);
-			   pst3.setInt(5, git_following);
+			   pst3.setString(4, git_followers);
+			   pst3.setString(5, git_following);
 			   pst3.executeUpdate();
 			   System.out.println("databaseConnection at line "+lineNum()+": GitHub details inserted into database");
 			   pst3.close();

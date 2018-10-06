@@ -76,7 +76,7 @@ public class scoreCalculator {
 		int git_flr = Integer.parseInt(databaseConnection.selectCertainData("github", reg_no, "followers"));
 		int git_flg = Integer.parseInt(databaseConnection.selectCertainData("github", reg_no, "following_"));
 		float git_score = 0;
-		git_score = (float)(git_repo/5) + (float)(git_stars/8) + (float)(git_flr/15) + (float)(git_flg/25);
+		git_score = (float)(git_repo/5) + (float)(git_stars/7);
 		git_score /= 10;
 		cf_score = (float)(cf_rating/38) -12;
 		cf_score /= 5;
@@ -89,9 +89,6 @@ public class scoreCalculator {
 		cp_score /= 2.5;
 		float dev_score = (float)(git_score*dev);
 		dev_score /= 2.5;
-		System.out.println(cp_score);
-		System.out.println(dev_score);
-		
 		float finalScore=0;
 		int parameterCount=1;
 		
@@ -104,7 +101,7 @@ public class scoreCalculator {
 	}
 	
 	public static void main(String args[]) {
-		System.out.println(ultimateAlgorithm(1,"java:10,CPP:7,Python:4","java,Cpp",4,6));
+		System.out.println(ultimateAlgorithm(3,"java:10,CPP:7,Python:4","java,Cpp",4,6));
 		
 	}
 }

@@ -389,8 +389,8 @@ public class ScraperOfAllData {
 
 
 			//no. of followers
-			public static int followers_Git(String account_name) {
-				try{
+			public static String followers_Git(String account_name) {
+				try{double value=0;
 				UserAgent x=new UserAgent();
 
 				x.settings.autoSaveAsHTML=true;		
@@ -401,19 +401,19 @@ public class ScraperOfAllData {
 		        int i=0;
 		        for(Element val:uno) {
 		        	arr[i]=val.getChildText();
+		        	
 		        	i++;
 		        }
-		       
-		         return Integer.parseInt(arr[2].trim());
+		         return arr[2].trim();
 				}
 			catch(JauntException e){
-				return 0;}
+				return "";}
 			}
 			
 
 
 			//no. of following
-			public static int following_Git(String account_name) {
+			public static String following_Git(String account_name) {
 				try{
 				UserAgent x=new UserAgent();
 
@@ -428,10 +428,10 @@ public class ScraperOfAllData {
 		        	i++;
 		        }
 		       
-		         return Integer.parseInt(arr[3].trim());
+		         return arr[3].trim();
 				}
 			catch(JauntException e){
-				return 0;}
+				return "";}
 			}
 			
 			
@@ -501,7 +501,8 @@ public class ScraperOfAllData {
 	
 		*/	
 	//codeForces:
-			System.out.println("The codeforces Rating is "+codeForcesRanking("-1"));
+		//	System.out.println("The codeforces Rating is "+codeForcesRanking("tourist"));
+		//	System.out.println("The starCC is "+star_CC("yash"));
 		}
 
 
